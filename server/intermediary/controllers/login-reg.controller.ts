@@ -121,7 +121,7 @@ export const LoginRegController = {
                     }
                     res.json(new ServerMessage(body.success, null));
                 } catch (e) {
-                    console.log('error occurred', e);``
+                    console.log('error occurred', e);
                     res.json(new ServerMessage(false, null));
                 }
             });
