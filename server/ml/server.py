@@ -208,7 +208,7 @@ def verifyUser():
     
 
 
-    if confidence < 50:
+    if confidence < 48:
         success =True
     print(success)
 

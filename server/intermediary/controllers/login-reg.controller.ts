@@ -3,6 +3,7 @@
 import * as mongoose from 'mongoose';
 import * as express from 'express';
 import * as HttpClient from 'request';
+import { MICROSERVICE } from '../config/init';
 
 // BACKEND INTERFACES
 import { ServerMessage, IServerMessage } from './../json-formats/backend-interfaces/server-message.backend';
@@ -11,13 +12,16 @@ import { IImageContainer, ImageContainer } from '../json-formats/backend-interfa
 
 // MONGO INTERFACES
 import { IUserModel } from '../json-formats/mongo-interfaces/user.mongo';
-import { MICROSERVICE } from '../config/init';
+import { INoteModel } from '../json-formats/mongo-interfaces/note.mongo';
+import { IProfileModel } from '../json-formats/mongo-interfaces/profile.mongo';
+import { ISubjectModel } from '../json-formats/mongo-interfaces/subject.mongo';
 
 
 // wraps all currently used models in a quick lookup object
 const models = {
-    User: mongoose.model<IUserModel>('user')
-}
+    User: mongoose.model<IUserModel>('user'),
+    Profile: mongoose.model<IProfileModel>('profile')
+};
 
 /**
  * master login and registration controller
@@ -81,14 +85,23 @@ export const LoginRegController = {
             // bug to later be fixed!
             try {
                 body = JSON.parse(body);
-                const newUser = new models.User({ modelYML: body.modelYML, name: req.body.name });
-                newUser.save((err, product) => {
+                const newUser = new models.User({ name: req.body.name });
+                const newProfile = new models.Profile({ modelYML: body.modelYML });
+                newProfile.save((err, product) => {
                     if (err) {
                         res.json(new ServerMessage(false, err));
                         throw err;
                     } else {
-                        req.session._id = product._id;
-                        res.json(new ServerMessage(true, product));
+                        newUser.profile = product._id;
+                        newUser.save((err, product) => {
+                            if (err) {
+                                res.json(new ServerMessage(false, err));
+                                throw err;
+                            } else {
+                                req.session._id = product._id;
+                                res.json(new ServerMessage(true, product));
+                            }
+                        });
                     }
                 });
             } catch (e) {
@@ -106,23 +119,22 @@ export const LoginRegController = {
         // finds the user, if the user exists verify,
         // route impossible to be no user due to the api call
         // that happens before calling this in the frontend
-        models.User.findOne({ name: req.body.name }, (err, user) => {
+        models.User.findOne({ name: req.body.name }).populate('profile').exec((err, user) => {
             HttpClient.post(`${MICROSERVICE}api/ml/verify`, {
                 form: {
                     images: attemptsContainer.images,
-                    modelYML: user.modelYML
+                    modelYML: user.profile.modelYML
                 }
             }, (err, response, body) => {
                 try {
                     body = JSON.parse(body);
-                    console.log(body);
                     if (body.success) {
                         req.session._id = user._id;
                     }
-                    res.json(new ServerMessage(body.success, null));
+                    res.json(new ServerMessage(body.success, user));
                 } catch (e) {
                     console.log('error occurred', e);
-                    res.json(new ServerMessage(false, null));
+                    res.json(new ServerMessage(false, user));
                 }
             });
         });

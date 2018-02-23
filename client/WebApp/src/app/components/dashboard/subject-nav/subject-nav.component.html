@@ -1,0 +1,6 @@
+<div class="col-md-1 subjects">
+    <div *ngFor='let s of subjects'>
+        <img src="assets/img/subject.png" class="subject" (click)='navSubject(s._id)'>
+    </div>
+    <img src="assets/img/new-subject.png" class="subject" (click)='openDialog()'>
+</div>
