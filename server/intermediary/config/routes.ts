@@ -6,6 +6,7 @@ import * as path from 'path';
 // CONTROLLERS
 import { LoginRegController } from './../controllers/login-reg.controller';
 import { DevController } from '../controllers/dev.controller';
+import { DashboardController } from '../controllers/dashboard.controller';
 
 
 
@@ -21,6 +22,14 @@ export const routes = (app: express.Express) => {
 
     // Dev Routes
     app.post('/api/exp/dev/login', (req, res) => DevController.login(req, res));
+    app.get('/api/exp/dev/get-user-with-model/:id', (req, res) => DevController.getModel(req, res));
+
+    // Dashboard Routes
+    app.post('/api/exp/dash/post-note/:subjectId', (req, res) => DashboardController.postNote(req, res));
+    app.post('/api/exp/dash/post-subject/:userId', (req, res) => DashboardController.postSubject(req, res));
+    app.get('/api/exp/dash/get-subjects/:userId', (req, res) => DashboardController.getSubjects(req, res));
+    app.get('/api/exp/dash/get-notes/:subjectId', (req, res) => DashboardController.getNotes(req, res));
+    app.get('/api/exp/dash/get-subject/:subjectId', (req, res) => DashboardController.getSubject(req, res));
 
     // Base route and serves frontend
     app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../../../client/WebApp/dist/index.html')));

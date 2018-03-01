@@ -1,0 +1,133 @@
+body {
+  background-color:#F5E3CD;
+}
+
+.subjects {
+  text-align:center;
+  background-color:#C7B8A6;
+  height:94vh;
+}
+
+.note-form {
+  padding:8px;
+  width:50%;
+  display:inline-block;
+  margin-right:40px;
+}
+
+.subject {
+  margin-top:10px;
+  margin-bottom:10px;
+  width:50px;
+  margin-left:11px;
+}
+
+@media (min-width:992px) {
+  .col-md-1 {
+    width:5.3%;
+  }
+}
+
+.input-sm.form-control {
+  font-size:17px;
+  height:40px;
+}
+
+.empty-subject {
+  background-color:#504A43;
+  height:56px;
+}
+
+@media (min-width:992px) {
+  .col-md-11 {
+    width:93.799%;
+  }
+}
+
+.note-form-head {
+  background-color:#504A43;
+}
+
+html, body {
+  max-width:100%;
+  overflow-x:hidden;
+  overflow-y:hidden;
+}
+
+.form-control {
+  display:inline-block;
+  width:100%;
+  height:34px;
+  padding:6px 12px;
+  font-size:14px;
+  line-height:1.42857143;
+  color:#ffffff;
+  background-color:#504a43;
+  background-image:none;
+  border:1px solid #877d71;
+  border-radius:4px;
+  -webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075);
+  box-shadow:inset 0 1px 1px rgba(0,0,0,.075);
+  -webkit-transition:border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+  -o-transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.form-control:focus {
+  border-color:#82796f;
+  outline:0;
+  -webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px #c2b19c;
+  box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px #bfb2a2;
+}
+
+.set-white {
+  color:white;
+  display:inline-block;
+}
+
+.set-header {
+  font-size:18px;
+}
+
+.description {
+  height:100vh;
+  background-color:#C7B8A6;
+}
+
+@media (min-width:1200px) {
+  .col-lg-2 {
+    width:18.8%;
+  }
+}
+
+.white-desc {
+  color:white;
+}
+
+.size-default {
+  font-size:16px;
+}
+
+.note-container {
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
+.draw-div {
+  height:2px;
+  border-radius:50px;
+  background-color:#C7B8A6;
+}
+
+p {
+  margin:5px 0 10px;
+}
+
+.subject:hover {
+  opacity:0.5;
+}
+
+.set-subject {
+  margin-right:25px;
+}
+

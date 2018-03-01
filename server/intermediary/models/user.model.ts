@@ -11,11 +11,17 @@ const UserSchema = new mongoose.Schema({
         minlength: [3, 'first name must be at least 3 characters long'],
         maxlength: [255, 'first name cannot be longer than 255'],
     },
-    modelYML: {
-        type: String,
-        default: null
-    }
-}, { timestamps: true });
+    profile: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'profile'
+    },
+    subjects: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'subject'
+        }
+    ]
+}, { timestamps: true, usePushEach: true });
 
 // adds the schema as a collection
 mongoose.model('user', UserSchema);

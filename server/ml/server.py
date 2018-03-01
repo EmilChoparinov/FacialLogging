@@ -158,8 +158,6 @@ def verifyUser():
     #counter = 0
     #trials = 0.0
     ConfidenceArray =[]
-    LabelArray = []
-    ImageArray =[]
 
     # define success - starts as False
     success = False
@@ -182,14 +180,6 @@ def verifyUser():
             try:
                 #if confidence < 45:
                 ConfidenceArray.append(confidence)
-                LabelArray.append(1)
-                if confidence:
-                    print("faces")
-                    print(faces)
-                    ImageArray.append(processImage[y:y+h,x:x+w])
-
-
-
                 #counter = counter+1
             except:
                 pass
@@ -197,9 +187,6 @@ def verifyUser():
         #trials = trials + 1
     
     # if 3 out of 5 images are identified as user success is True
-
-    
-       
    
     try:
         q25, q75, iqr = getIQR(ConfidenceArray)
@@ -221,12 +208,8 @@ def verifyUser():
     
 
 
-    if confidence < 50:
+    if confidence < 48:
         success =True
-        print(LabelArray)
-        print(len(ImageArray))
-        recognizer.update(ImageArray,np.array(LabelArray))
-        recognizer.save('trainer/trainer.yml')
     print(success)
 
     
@@ -236,7 +219,7 @@ def verifyUser():
     # print(success)
 
 
-    return jsonify({'success': success, 'modelYML': getFileContents() })
+    return jsonify({'success': success})
 
 
 

@@ -10,6 +10,12 @@
 /client/WebApp/node_modules
 /server/intermediary/node_modules
 
+# environments
+/server/ml/FaceLoginEnv
+
+# trainers
+/server/ml/trainer
+
 # datasets
 /server/ml/dataset
 

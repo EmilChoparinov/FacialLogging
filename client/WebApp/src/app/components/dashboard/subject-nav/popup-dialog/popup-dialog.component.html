@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Add a new Subject</h2>
+<mat-dialog-content>
+  <p>Name of your subject?</p>
+  <input type="text" matInput [(ngModel)]='subject.name'class='form-control'>
+  <p>Some details?</p>
+  <input type="text" matInput [(ngModel)]='subject.details' class='form-control'>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close class="btn btn-danger btn-m-right float-right">Close</button>
+  <button mat-button mat-dialog-close class="btn btn-success float-right">Add</button>
+</mat-dialog-actions>

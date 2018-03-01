@@ -1,0 +1,5 @@
+<span class="set-white set-header">Add a marvelous note here: </span>
+<div class="note-form">
+    <input class="input-sm form-control" type="text" placeholder="your note.." [(ngModel)]='note.content' (keyup)='addNote($event)'>
+</div>
+<span class="set-white set-header set-subject">{{subject.name}}</span>

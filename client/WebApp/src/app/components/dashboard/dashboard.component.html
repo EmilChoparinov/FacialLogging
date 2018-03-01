@@ -1,1 +1,11 @@
-<button class="btn btn-danger" (click)='logout()'>Logout</button>
+<div class="row">
+    <div class="col-md-1 empty-subject"></div>
+    <div class="col-md-11 note-form-head">
+        <app-add-note></app-add-note>
+        <button class="btn btn-danger" (click)='logout()'>Logout</button>
+    </div>
+</div>
+<div class="row">
+    <app-subject-nav></app-subject-nav>
+    <app-show-notes></app-show-notes>
+</div>
